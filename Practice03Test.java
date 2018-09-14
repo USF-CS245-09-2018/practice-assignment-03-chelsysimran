@@ -1,9 +1,13 @@
 import java.util.Random;
+import java.util.*;
 
 
 public class Practice03Test {
 
 	protected int count = 0;
+	protected int left;
+	protected int right;
+	protected int middle;
 	protected double [] arr;
 
 
@@ -52,15 +56,63 @@ public class Practice03Test {
 	}
 
 
-	public int find_min_iterative () {
-		// TODO: Fill in this iterative function.
+	public int find_min_iterative () 
+	{
+		int count = 0;
+
+		for (int i = 1; i < arr.length; i++)
+		{
+
+			if (arr[i] < arr[count])
+			{
+				count = i;
+
+			}
+		} 
+
+		return count;
 	}
 
 
-	public int find_min_recursive () {
-		// TODO: Fill in this recursive function.
+	public int find_min_recursive (int current_min, int current_index) 
+	{
+		if (arr.length-1 <= current_index)
+		{
+			return current_min;
+		}
+
+		if (arr[current_index] < arr[current_min])
+		{
+			current_min = current_index;
+		}
+
+		return find_min_recursive(current_min, current_index+1);
+		
+		
 	}
 
+	/*public int findMin (double []arr, int l, int r)
+	{
+		if (l == r)
+		{
+			return 1;
+		}
+
+		int m = ((l+r)/2);
+		int first = findMin(arr, l, m);
+		int second = findMin(arr, m+1, r);
+
+		if (arr[first] <= arr[second])
+		{
+			return first;
+		}
+
+		else
+		{
+			return second;
+		}
+
+	}*/
 
 	/**
 	 * print_min: determines the min iteratively and recursively.
@@ -68,7 +120,7 @@ public class Practice03Test {
 	 */
 	public void print_min() {
 		System.out.println("Iteratively determined min at index " + find_min_iterative());
-		System.out.println("Recursively determined min at index " + find_min_recursive());
+		System.out.println("Recursively determined min at index " + find_min_recursive(0,0));
 	}
 
 
